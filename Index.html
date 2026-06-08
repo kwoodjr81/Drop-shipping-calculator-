@@ -1,7 +1,289 @@
-echo "# Drop-shipping-calculator-" >> README.md
-git init
-git add README.mdi
-git commit -m "first commit"
-git branch -M main
-git remote add origin https://github.com/kwoodjr81/Drop-shipping-calculator-.git
-git push -u origin main
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <title>Dropshipping Profit Reality Calculator</title>
+
+  <style>
+
+    body {
+
+      font-family: Arial, sans-serif;
+
+      background: #0f172a;
+
+      color: white;
+
+      margin: 0;
+
+      padding: 0;
+
+    }
+
+    .container {
+
+      max-width: 900px;
+
+      margin: auto;
+
+      padding: 40px 20px;
+
+    }
+
+    h1 {
+
+      font-size: 32px;
+
+      margin-bottom: 10px;
+
+    }
+
+    p {
+
+      color: #cbd5e1;
+
+    }
+
+    .card {
+
+      background: #111827;
+
+      padding: 20px;
+
+      border-radius: 12px;
+
+      margin-top: 20px;
+
+    }
+
+    input {
+
+      width: 100%;
+
+      padding: 12px;
+
+      margin: 8px 0;
+
+      border-radius: 8px;
+
+      border: none;
+
+    }
+
+    button {
+
+      width: 100%;
+
+      padding: 14px;
+
+      background: #22c55e;
+
+      border: none;
+
+      border-radius: 8px;
+
+      color: black;
+
+      font-weight: bold;
+
+      cursor: pointer;
+
+      margin-top: 10px;
+
+    }
+
+    button:hover {
+
+      background: #16a34a;
+
+    }
+
+    .result {
+
+      margin-top: 20px;
+
+      padding: 15px;
+
+      background: #1f2937;
+
+      border-radius: 10px;
+
+    }
+
+    .loss {
+
+      color: #ef4444;
+
+      font-weight: bold;
+
+    }
+
+    .profit {
+
+      color: #22c55e;
+
+      font-weight: bold;
+
+    }
+
+    .warning {
+
+      margin-top: 15px;
+
+      font-size: 14px;
+
+      color: #fbbf24;
+
+    }
+
+    .footer {
+
+      margin-top: 40px;
+
+      font-size: 12px;
+
+      color: #64748b;
+
+      text-align: center;
+
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- HERO -->
+
+  <h1>💰 Dropshipping Profit Reality Calculator</h1>
+
+  <p>
+
+    Find out your REAL profit after product cost, ads, and fees.
+
+    Most beginners are surprised by the result.
+
+  </p>
+
+  <!-- TOOL -->
+
+  <div class="card">
+
+    <h3>Enter Your Store Data</h3>
+
+    <input id="price" type="number" placeholder="Selling Price ($)">
+
+    <input id="cost" type="number" placeholder="Product Cost ($)">
+
+    <input id="shipping" type="number" placeholder="Shipping Cost ($)">
+
+    <input id="ads" type="number" placeholder="Ad Spend per Sale ($)">
+
+    <input id="fee" type="number" placeholder="Platform Fee % (default 10)">
+
+    <button onclick="calculate()">Calculate Real Profit</button>
+
+    <div class="result" id="resultBox" style="display:none;"></div>
+
+    <div class="warning">
+
+      ⚠️ Most dropshippers underestimate ad costs and fees — this tool shows reality.
+
+    </div>
+
+  </div>
+
+  <!-- SEO SECTION -->
+
+  <div class="card">
+
+    <h3>Why use this tool?</h3>
+
+    <p>
+
+      This calculator shows your true dropshipping profit after all expenses.
+
+      It is designed for Shopify, Etsy, Amazon FBA, and TikTok Shop sellers.
+
+    </p>
+
+  </div>
+
+  <div class="footer">
+
+    Free tool • Built for ecommerce sellers • Estimate only, not financial advice
+
+  </div>
+
+</div>
+
+<script>
+
+function calculate() {
+
+  let price = parseFloat(document.getElementById("price").value) || 0;
+
+  let cost = parseFloat(document.getElementById("cost").value) || 0;
+
+  let shipping = parseFloat(document.getElementById("shipping").value) || 0;
+
+  let ads = parseFloat(document.getElementById("ads").value) || 0;
+
+  let feePercent = parseFloat(document.getElementById("fee").value) || 10;
+
+  let fees = price * (feePercent / 100);
+
+  let profit = price - (cost + shipping + ads + fees);
+
+  let resultBox = document.getElementById("resultBox");
+
+  resultBox.style.display = "block";
+
+  if (profit >= 0) {
+
+    resultBox.innerHTML = `
+
+      <h3 class="profit">✅ You are PROFITABLE</h3>
+
+      <p><b>Profit per sale:</b> $${profit.toFixed(2)}</p>
+
+      <p><b>Revenue:</b> $${price.toFixed(2)}</p>
+
+      <p><b>Total costs:</b> $${(cost + shipping + ads + fees).toFixed(2)}</p>
+
+    `;
+
+  } else {
+
+    resultBox.innerHTML = `
+
+      <h3 class="loss">❌ You are LOSING MONEY</h3>
+
+      <p><b>Loss per sale:</b> $${Math.abs(profit).toFixed(2)}</p>
+
+      <p><b>Revenue:</b> $${price.toFixed(2)}</p>
+
+      <p><b>Total costs:</b> $${(cost + shipping + ads + fees).toFixed(2)}</p>
+
+      <p>⚠️ You may need to increase price or reduce ad spend.</p>
+
+    `;
+
+  }
+
+}
+
+</script>
+
+</body>
+
+</html>
